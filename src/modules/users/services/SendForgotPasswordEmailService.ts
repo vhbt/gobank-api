@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
@@ -31,10 +32,29 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
-    await this.mailProvider.sendMail(
-      email,
-      `Para recuperar sua senha, utilize o token: ${token}`,
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgot_password.hbs',
     );
+
+    const baseUrlResetToken = 'http://localhost:3333/reset_password';
+
+    await this.mailProvider.sendMail({
+      to: {
+        name: user.full_name,
+        email: user.email,
+      },
+      subject: '[GoBank] Recuperação de senha',
+      templateData: {
+        file: forgotPasswordTemplate,
+        variables: {
+          full_name: user.full_name,
+          link: `${baseUrlResetToken}?token=${token}`,
+        },
+      },
+    });
   }
 }
 

@@ -31,7 +31,7 @@ class ResetPasswordService {
       throw new AppError('Invalid reset token.');
     }
 
-    const user = await this.usersRepository.findById(userToken?.user_id);
+    const user = await this.usersRepository.findById(userToken.user_id);
 
     if (!user) {
       throw new AppError('Invalid reset token.');

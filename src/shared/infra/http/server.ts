@@ -3,6 +3,7 @@ import 'dotenv/config.js';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -13,6 +14,7 @@ import '@shared/container';
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
@@ -38,4 +40,4 @@ app.use(
 
 app.listen(3333);
 
-console.log('> Running on port 3333');
+console.log('✨ Running on port 3333');

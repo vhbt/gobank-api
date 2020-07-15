@@ -7,6 +7,7 @@ const transactionsRouter = Router();
 const transactionsController = new TransactionsController();
 
 transactionsRouter.use(ensureAuthenticated);
+transactionsRouter.get('/', transactionsController.index);
 transactionsRouter.post('/', transactionsController.create);
 
 export default transactionsRouter;

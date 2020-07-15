@@ -6,7 +6,6 @@ import CreateUserService from './CreateUserService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
-
 let createUser: CreateUserService;
 
 describe('CreateUser', () => {

@@ -22,12 +22,10 @@ export default class CreateTransactions1593608770067
           {
             name: 'from_id',
             type: 'uuid',
-            isNullable: true,
           },
           {
             name: 'to_id',
             type: 'uuid',
-            isNullable: true,
           },
           {
             name: 'value',
